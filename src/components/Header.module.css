@@ -1,0 +1,229 @@
+/* ===== ШАПКА (ПРОЗРАЧНАЯ) ===== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 0;
+    /* БЕЗ ФОНА, только элементы */
+}
+
+
+/* Логотип в шапке (скрыт изначально) */
+.header-logo {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 35px;
+    opacity: 0;
+    
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+
+.scrolled .header-logo {
+  opacity: 1;
+}
+
+
+/* Контейнер навигации */
+.nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    padding: 12px 30px;
+    max-width: 460px;
+    margin: 0 auto;
+    
+    /* Прямоугольник навигации */
+    background: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Ссылки навигации */
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #696969;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #272727;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Кнопка бронирования (отдельный прямоугольник) */
+.booking-button {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px 30px;
+    
+    background: rgba(60, 60, 60, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    
+    transition: all 0.3s ease;
+}
+
+.booking-button:hover {
+    background: rgba(80, 80, 80, 0.8);
+    transform: translateY(-50%) scale(1.05);
+}
+
+
+.section-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+
+
+/* Адаптив шапки и кнопки "Забронировать" */
+
+/* Для планшетов и меньше */
+@media (max-width: 1200px) {
+    .header {
+        padding: 15px 0; /* Уменьшаем отступы */
+    }
+    
+    .nav-container {
+        gap: 15px; /* Уменьшаем расстояние между ссылками */
+        padding: 10px 20px;
+        max-width: 100%; /* Полная ширина */
+    }
+    
+    .nav-link {
+        font-size: 0.85rem; /* Меньший шрифт */
+    }
+    
+    .header-logo {
+        height: 30px; /* Уменьшаем логотип */
+        left: 15px;
+    }
+    
+    .booking-button {
+        padding: 15px 25px; /* Уменьшаем кнопку */
+        font-size: 0.85rem;
+        right: 15px;
+    }
+}
+
+/* Для мобильных (планшеты/телефоны) */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-wrap: wrap; /* Перенос ссылок на новую строку если нужно */
+        justify-content: space-around;
+        padding: 8px 15px;
+    }
+    
+    .nav-link {
+        font-size: 0.8rem;
+    }
+    
+    .header-logo {
+        height: 25px;
+        left: 10px;
+    }
+    
+    /* Кнопка "Забронировать" становится круглой с иконкой */
+    .booking-button {
+        width: 50px; /* Круглая форма */
+        height: 50px;
+        padding: 0;
+        border-radius: 50%; /* Полностью круглая */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        right: 10px;
+        background: rgba(80, 80, 80, 0.8); /* Темнее для видимости */
+        font-size: 0; /* Скрываем текст */
+    }
+    
+    .booking-button::before {
+        content: '\f073'; /* Иконка календаря из Font Awesome (бронь) */
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        font-size: 1.2rem;
+        color: white;
+    }
+    
+    .booking-button:hover {
+        transform: scale(1.1); /* Легкий зум */
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .nav-container {
+        gap: 10px;
+        padding: 5px 10px;
+    }
+    
+    .nav-link {
+        font-size: 0.75rem;
+    }
+    
+    .booking-button {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .booking-button::before {
+        font-size: 1rem;
+    }
+}
+
+
+

@@ -1,0 +1,2005 @@
+
+
+/* ===== ГЛАВНАЯ СЕКЦИЯ ===== */
+.hero {
+    height: 90vh; /* Уменьшили с 100vh до 85vh */
+    min-height: 600px; /* Добавили минимальную высоту */
+    width: 100%;
+    background-color: black;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    overflow: hidden;
+    position: relative;
+}
+
+
+
+/* ===== ВИДЕО ФОН ===== */
+.hero-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    
+    /* УБИРАЕМ diveIn анимацию, добавляем только плавное появление */
+    opacity: 0;
+    animation: videoFadeIn 0.3s ease-out forwards;
+    
+    /* СРАЗУ делаем видео темнее */
+    filter: brightness(0.7); /* 60% яркости = 40% темнее */
+}
+
+/* НОВАЯ анимация ТОЛЬКО плавного появления БЕЗ приближения */
+@keyframes videoFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Оверлей для дополнительного затемнения */
+    
+    opacity: 0;
+    animation: fadeIn 1s 0.7s ease-out forwards;
+}
+
+
+
+/* Анимация для видео при скролле вниз */
+.hero.bg-down .hero-video {
+    animation: scrollDown 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
+}
+
+/* Анимация для видео при возврате назад */
+.hero.bg-up .hero-video {
+    animation: scrollUp 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards !important;
+}
+
+
+
+
+
+/* Логотип на главной */
+.hero__logo {
+    position: relative;
+    z-index: 2;
+    max-width: 460px;
+    width: 50%;
+    height: auto;
+    margin-bottom: 30px;
+    filter: brightness(1.05) contrast(1.1);
+    
+    /* Анимация появления */
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1.5s 1.0s ease-out forwards;
+}
+
+/* Подзаголовок */
+.hero__subtitle {
+    position: relative;
+    z-index: 2;
+    color: #ccc;
+    font-family: 'Bahnschrift', var(--font-montserrat), sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    
+    opacity: 0;
+    animation: fadeInUp 1.5s 0.8s ease-out forwards;
+}
+
+/* Оверлей для контраста */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 10, 10, 0.4);
+    z-index: 1;
+    
+    opacity: 0;
+    animation: fadeIn 1s 1.3s ease-out forwards;
+}
+
+
+
+/* ===== КЛЮЧЕВЫЕ КАДРЫ (ИСПРАВЛЕННЫЕ) ===== */
+@keyframes diveIn {
+    0% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+    60% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes scrollDown {
+    0% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(25%) scale(1.08);
+        opacity: 0.3;
+    }
+}
+
+@keyframes scrollUp {
+    0% {
+        transform: translateY(25%) scale(1.08);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes contentFadeOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes contentFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ===== СЕКЦИЯ ИСТОРИИ ===== */
+.history-section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+    overflow: hidden;
+}
+
+/* Фон истории */
+.history-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+/* Контент истории */
+.history-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    transform: translateX(-100px);
+    opacity: 0;
+    transition: transform 1s ease-out, opacity 1s ease-out;
+}
+
+.history-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    color: #fff;
+}
+
+.history-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #ccc;
+}
+
+.history-text p {
+    margin-bottom: 20px;
+}
+
+/* Активация секции истории */
+.history-section.active .history-bg {
+    opacity: 1;
+}
+
+.history-section.active .history-content {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* ===== КЛЮЧЕВЫЕ КАДРЫ АНИМАЦИЙ ===== */
+@keyframes diveIn {
+    0% {
+        transform: scale(1.3);
+        opacity: 0;
+        filter: blur(5px);
+    }
+    50% {
+        opacity: 0.5;
+        filter: blur(2px);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+
+
+/* Уточненная адаптация главной страницы */
+
+/* Для мобильных (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Вторая секция: История (history-section) - центрируем текст, уменьшаем шрифт */
+    .history-section {
+        height: auto; /* Авто-высота для мобильных */
+        min-height: auto;
+        padding: 40px 5%; /* Отступы */
+        text-align: center; /* Центрируем весь текст */
+        flex-direction: column; /* В столбик */
+    }
+    
+    .history-content {
+        width: 100%; /* Полная ширина */
+        max-width: 100%;
+    }
+    
+    .history-title {
+        font-size: 2rem; /* Уменьшаем шрифт */
+        margin-bottom: 20px;
+    }
+    
+    .history-text {
+        font-size: 1rem; /* Уменьшаем шрифт */
+        line-height: 1.6;
+    }
+    
+    .history-text p {
+        margin-bottom: 15px;
+    }
+    
+    /* Третья секция: Фирменные блюда (signature-dishes) - карточки в столбик */
+    .signature-section {
+        padding: 60px 5%; /* Уменьшаем отступы */
+    }
+    
+    .dishes-container { /* Если это контейнер карточек, иначе подставь правильный класс */
+        display: grid;
+        grid-template-columns: 1fr; /* В столбик (одна колонка) */
+        gap: 30px; /* Расстояние между карточками */
+    }
+    
+    .dish-card {
+        width: 100%; /* Полная ширина */
+        height: auto; /* Авто-высота */
+    }
+    
+    .dish-card img { /* Если фото в карточках мешают */
+        display: block; /* Или none, если скрыть */
+        max-height: 200px; /* Уменьшаем фото */
+    }
+    
+    /* Секция атмосферы: Видео в столбик */
+    .atmosphere-section {
+        padding: 40px 5%; /* Уменьшаем отступы */
+        min-height: auto;
+    }
+    
+    .video-grid {
+        grid-template-columns: 1fr; /* В столбик (одна колонка) */
+        grid-template-rows: auto; /* Авто-высота */
+        height: auto; /* Авто-высота всего блока */
+        gap: 20px; /* Расстояние между видео */
+    }
+    
+    .main-video,
+    .small-video {
+        height: 250px; /* Уменьшаем видео */
+        width: 100%; /* Полная ширина */
+    }
+    
+    .side-videos {
+        grid-template-columns: 1fr; /* Маленькие видео тоже в столбик */
+        gap: 20px;
+    }
+    
+    .atmosphere-title {
+        font-size: 2rem; /* Уменьшаем шрифт */
+        text-align: center;
+    }
+    
+    .text-paragraph.large {
+        font-size: 1.2rem;
+    }
+    
+    .text-paragraph.medium,
+    .text-paragraph.small {
+        font-size: 1rem;
+    }
+    
+    /* Скрываем лишние анимированные фото/элементы, если мешают тексту */
+    .history-photo, /* Фото в истории */
+    .atmosphere-section::before, /* Фон атмосферы */
+    .signature-section::before { /* Если есть анимированный фон в блюдах */
+        display: none; /* Скрываем */
+    }
+}
+
+/* Для очень маленьких экранов (max-width: 480px) */
+@media (max-width: 480px) {
+    /* Вторая секция: Еще меньше шрифты */
+    .history-title {
+        font-size: 1.8rem;
+    }
+    
+    .history-text {
+        font-size: 0.95rem;
+    }
+    
+    /* Третья секция: Карточки */
+    .dishes-container {
+        gap: 20px;
+    }
+    
+    .dish-card {
+        padding: 15px;
+    }
+    
+    /* Атмосфера: Видео */
+    .main-video,
+    .small-video {
+        height: 200px;
+    }
+    
+    .atmosphere-title {
+        font-size: 1.8rem;
+    }
+}
+
+
+
+
+/* history.css - ОБНОВЛЁННАЯ ВЕРСИЯ: плавный градиент, исходный размер контейнера */
+
+/* ===== СЕКЦИЯ ИСТОРИИ ===== */
+.history-section {
+    position: relative;
+    height: 60vh;
+    min-height: 500px;
+    max-height: 600px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000000 !important;
+    isolation: isolate;
+    z-index: 100;
+    margin: 0;
+}
+
+/* Фото как фон всей секции (справа) */
+.history-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    background-image: url('/images/фото история.jpg');
+    background-size: cover;
+    background-position: center right 20%;
+    background-repeat: no-repeat;
+    
+    /* Уменьшенная яркость */
+    filter: brightness(0.5) contrast(1.05);
+    
+    /* Плавное простое появление */
+    opacity: 0;
+    transition: opacity 1.4s ease;
+}
+
+/* Плавный чёрный градиент слева */
+.history-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Половина секции */
+    height: 100%;
+    
+    /* Плавный градиент от чёрного к прозрачному */
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.98) 0%,     /* Полностью чёрный у левого края */
+        rgba(0, 0, 0, 0.95) 20%,    /* Почти чёрный */
+        rgba(0, 0, 0, 0.85) 40%,    /* Начинает светлеть */
+        rgba(0, 0, 0, 0.5) 60%,     /* Полупрозрачный */
+        rgba(0, 0, 0, 0.1) 70%,     /* Почти прозрачный */
+        transparent 100%            /* Полностью прозрачный у границы */
+    );
+    
+    z-index: 1;
+}
+
+/* Контейнер контента (текст) - исходный размер и позиция */
+.history-content {
+    position: relative;
+    z-index: 2;
+    max-width: 500px; /* Исходный размер */
+    margin-left: 20%; /* Исходная позиция */
+    margin-top: -1%;
+    
+    transform: translateX(-30px);
+    opacity: 0;
+    
+    transition: transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s,
+                opacity 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s;
+}
+
+/* Вертикальная полоска */
+.history-content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -30px; /* Исходное положение */
+    width: 3px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.9s ease 0.3s;
+}
+
+.history-section.animate-in .history-content::after {
+    transform: scaleY(1);
+}
+
+.history-section.animate-out .history-content::after {
+    transform: scaleY(0);
+    transition: transform 0.7s ease;
+}
+
+/* Текст */
+.history-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.history-text {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #f0f0f0;
+}
+
+/* ===== АНИМАЦИИ ПОЯВЛЕНИЯ ===== */
+
+/* Фон плавно появляется */
+.history-section.animate-in::before {
+    opacity: 1;
+}
+
+/* Текст появляется чуть позже */
+.history-section.animate-in .history-content {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Исчезновение */
+.history-section.animate-out::before {
+    opacity: 0;
+    transition: opacity 1.1s ease;
+}
+
+.history-section.animate-out .history-content {
+    transform: translateX(-30px);
+    opacity: 0;
+    transition: transform 1s cubic-bezier(0.22, 0.61, 0.36, 1),
+                opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+
+
+
+
+/* signature-dishes.css - С ОБРАТНОЙ АНИМАЦИЕЙ */
+
+.signature-section {
+    position: relative;
+    min-height: 100vh;
+    padding: 100px 10%;
+    background: 
+        linear-gradient(
+            135deg,
+            #0a0a0a 25%,
+            #080808 25%,
+            #080808 50%,
+            #0a0a0a 50%,
+            #0a0a0a 75%,
+            #080808 75%,
+            #080808 100%
+        );
+    background-size: 80px 80px;
+    overflow: hidden;
+    opacity: 0.99; /* Фикс для некоторых браузеров */
+}
+
+/* Эффект неровной текстуры */
+.signature-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23050505' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.2;
+    z-index: 0;
+}
+
+
+
+/* ===== АНИМАЦИИ ДЛЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ ===== */
+
+/* Заголовок секции */
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section-header.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+.section-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.section-subtitle {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1.1rem;
+    color: #aaa;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.title-line {
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    margin: 0 auto;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 1s ease 0.3s;
+}
+
+.section-header.animate-in .title-line {
+    transform: scaleX(1);
+}
+
+
+
+
+
+
+
+/* Контейнер карточек */
+.dishes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto 60px;
+    width: 80%;
+}
+
+/* Карточка блюда */
+.dish-card {
+    height: 500px;
+    perspective: 1000px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    
+}
+
+.dish-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+/* Задержки для каждой карточки при появлении */
+.dish-card:nth-child(1) { transition-delay: 0.1s; }
+.dish-card:nth-child(2) { transition-delay: 0.3s; }
+.dish-card:nth-child(3) { transition-delay: 0.5s; }
+
+
+.dish-card-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.dish-card.flipped .dish-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Обе стороны карточки */
+.dish-card-front,
+.dish-card-back {
+    
+    position: absolute; /* ОБА абсолютные! */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Лицевая сторона */
+.dish-card-front {
+    background: rgba(25, 25, 25, 0.8);
+    display: flex;
+    flex-direction: column;
+    transform: rotateY(0deg); /* Явно задаем */
+}
+
+/* Обратная сторона */
+.dish-card-back {
+    background: #1a1a1a;
+    transform: rotateY(0deg);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Изображение блюда */
+.dish-image {
+    height: 280px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.dish-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.dish-card:hover .dish-image img {
+    transform: scale(1.05);
+}
+
+.dish-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.dish-card:hover .dish-overlay {
+    opacity: 1;
+}
+
+.view-button {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.view-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Основная информация карточки */
+.dish-info {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dish-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.dish-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.dish-price {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1.4rem;
+    color: #fff;
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+/* Контент обратной стороны */
+.back-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dish-card-back h4 {
+    font-family: var(--font-cormorant), serif;
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.expanded-description {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.pairing h5 {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pairing p {
+    font-family: var(--font-montserrat), sans-serif;
+    color: #fff;
+    font-style: italic;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 15px;
+    border-radius: 8px;
+    border-left: 3px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.95rem;
+}
+
+/* Подсказка на обратной стороне */
+.back-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.back-hint {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    display: block;
+    text-align: center;
+}
+
+/* Подпись внизу секции */
+.section-footer {
+    text-align: center;
+    font-family: var(--font-montserrat), sans-serif;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease 0.6s, transform 0.8s ease 0.6s;
+}
+
+.section-footer.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-footer.animate-out {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+
+
+/* signature-dishes.css - ДОБАВИТЬ ЭТИ СТИЛИ В КОНЕЦ ФАЙЛА */
+
+/* ===== ЗАГИБАЮЩИЙСЯ УГОЛОК НА ЛИЦЕВОЙ СТОРОНЕ ===== */
+.dish-card-front {
+    position: relative;
+    background: rgba(25, 25, 25, 0.8);
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backface-visibility: hidden;
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.dish-card-front::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 70px;
+    height: 70px;
+    background: 
+        linear-gradient(135deg, 
+            transparent 50%, 
+            rgba(255, 255, 255, 0.05) 50%, 
+            rgba(255, 255, 255, 0.05) 55%, 
+            rgba(255, 255, 255, 0.12) 55%, 
+            rgba(255, 255, 255, 0.12) 70%, 
+            rgba(255, 255, 255, 0.07) 70%, 
+            rgba(255, 255, 255, 0.07) 100%);
+    border-top-left-radius: 8px;
+    z-index: 4;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 
+        inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+        -1px -1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.dish-card-front::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, transparent 50%, rgba(0, 0, 0, 0.3) 50%);
+    border-top-left-radius: 9px;
+    z-index: 3;
+    pointer-events: none;
+    transition: all 0.4s ease;
+}
+
+.dish-card:hover .dish-card-front::before {
+    width: 75px;
+    height: 75px;
+    background: 
+        linear-gradient(135deg, 
+            transparent 50%, 
+            rgba(255, 255, 255, 0.08) 50%, 
+            rgba(255, 255, 255, 0.08) 55%, 
+            rgba(255, 255, 255, 0.15) 55%, 
+            rgba(255, 255, 255, 0.15) 70%, 
+            rgba(255, 255, 255, 0.09) 70%, 
+            rgba(255, 255, 255, 0.09) 100%);
+    box-shadow: 
+        inset -3px -3px 6px rgba(0, 0, 0, 0.4),
+        -2px -2px 3px rgba(255, 255, 255, 0.15),
+        0 0 15px rgba(255, 255, 255, 0.1);
+    transform: translate(2px, 2px);
+}
+
+.dish-card:hover .dish-card-front::after {
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 1;
+}
+
+
+/* Тонкая линия-индикатор */
+.dish-card-front .corner-line {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0 0 4px 0;
+    z-index: 5;
+    pointer-events: none;
+    transition: all 0.4s ease;
+    transform: rotate(45deg);
+}
+
+.dish-card:hover .corner-line {
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: rotate(45deg) scale(1.1);
+    border-width: 2.5px;
+}
+
+
+/* ===== ОБРАТНАЯ СТОРОНА С ПРОКРУТКОЙ ===== */
+.dish-card-back {
+    position: absolute; /* Меняем на absolute */
+    background: #1a1a1a;
+    transform: rotateY(180deg);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Убираем старый контейнер */
+.back-content {
+    display: none;
+}
+
+/* Новый контейнер с прокруткой */
+.back-content-scroll {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    padding: 40px 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+/* Стилизация скроллбара */
+.back-content-scroll::-webkit-scrollbar {
+    width: 5px;
+}
+
+.back-content-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.back-content-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+}
+
+.back-content-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Контейнер описания */
+.back-description {
+    margin-bottom: -25px;
+}
+
+.back-description h4 {
+    font-family: var(--font-cormorant), serif;
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 500;
+    line-height: 1.3;
+    padding-right: 10px; /* Для скроллбара */
+}
+
+.expanded-description {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #ccc;
+    padding-right: 5px; /* Для скроллбара */
+}
+
+.expanded-description p {
+    margin-bottom: 20px;
+}
+
+/* Контейнер парных блюд */
+.pairing-container {
+    margin-bottom: 20px;
+    padding-right: 10px; /* Для скроллбара */
+}
+
+.pairing-container h5 {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pairing-container p {
+    font-family: var(--font-montserrat), sans-serif;
+    color: #fff;
+    font-style: italic;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Галерея изображений на обратной стороне */
+.back-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-right: 10px; /* Для скроллбара */
+}
+
+.gallery-title {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.back-images {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.back-image {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.back-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.back-image:hover img {
+    transform: scale(1.05);
+}
+
+/* Подсказка внизу обратной стороны */
+.back-hint-container {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
+}
+
+.back-hint {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    display: block;
+    text-align: center;
+}
+
+/* Убираем старый footer */
+.back-footer {
+    display: none;
+}
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 1200px) {
+    .back-content-scroll {
+        padding: 30px 30px 15px;
+        gap: 25px;
+    }
+    
+    .back-image {
+        height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .back-content-scroll {
+        padding: 25px 20px 15px;
+        gap: 20px;
+    }
+    
+    .back-description h4 {
+        font-size: 1.6rem;
+    }
+    
+    .back-image {
+        height: 150px;
+    }
+    
+    .dish-card-front::before {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .dish-card-front::after {
+        bottom: 6px;
+        right: 6px;
+        font-size: 12px;
+    }
+}
+
+
+
+
+
+
+/* atmosphere.css - С АНИМАЦИЕЙ ДЛЯ ВСЕГО ТЕКСТА */
+
+/* ===== СЕКЦИЯ АТМОСФЕРЫ ===== */
+.atmosphere-section {
+    position: relative;
+    min-height: 80vh;
+    padding: 40px 27% 30px;
+    background-image: url('/images/фон для атмосферы.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    isolation: isolate;
+    z-index: 90;
+}
+
+/* ФОНОВАЯ ФОТОГРАФИЯ НА САМЫЙ ЗАДНИЙ ПЛАН */
+.atmosphere-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Путь к вашей фотографии */
+    background-image: url('/images/фон для атмосферы.jpg');
+    
+    /* Настройки фона */
+    background-size: cover; /* или contain, в зависимости от того, как хотите */
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 1;
+    
+    /* Самый задний слой */
+    z-index: 0;
+}
+
+
+/* ЗАГОЛОВОК - с анимацией */
+.atmosphere-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #fff;
+    margin: 15px auto 30px auto !important;
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+    text-align: center !important;
+    width: 100%;
+    
+    /* Начальное состояние для анимации */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1), 
+                transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+    /* Поднимаем над фоном */
+    position: relative;
+    z-index: 2;
+}
+
+/* ТЕКСТОВЫЙ БЛОК - БОЛЬШЕ ОТСТУПОВ */
+.atmosphere-text-container {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s, 
+                transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s;
+    padding: 0 20px; /* Дополнительные отступы внутри контейнера */
+}
+
+/* КОНТЕЙНЕР ТЕКСТА - с анимацией */
+.atmosphere-text {
+    font-family: var(--font-montserrat), sans-serif;
+    color: #e0e0e0;
+    width: 100%;
+    
+}
+
+/* ПАРАГРАФЫ - с индивидуальными анимациями */
+.text-paragraph {
+    margin-bottom: 20px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    
+    /* Параграфы появятся последовательно */
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1), 
+                transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+    /* Поднимаем над фоном */
+    position: relative;
+    z-index: 2;
+}
+
+/* Первый параграф - появляется первым */
+.text-paragraph.large {
+    font-size: 2.7rem;
+    line-height: 1.9;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+    transition-delay: 0.5s;
+}
+
+/* Второй параграф - появляется вторым */
+.text-paragraph.medium {
+    font-size: 2.7rem;
+    line-height: 1.8;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+    transition-delay: 0.7s;
+}
+
+/* Третий параграф - появляется третьим */
+.text-paragraph.small {
+    font-size: 2.7rem;
+    line-height: 1.7;
+    font-weight: 300;
+    letter-spacing: 0.1px;
+    color: #ccc;
+    transition-delay: 0.9s;
+}
+
+/* Футер секции - с анимацией */
+.atmosphere-footer {
+    text-align: center;
+    margin-top: 40px !important;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px 40px 0; /* Добавили боковые отступы */
+    
+    /* Начальное состояние для анимации */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 1.1s, 
+                transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 1.1s;
+}
+
+.atmosphere-hint {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.95rem;
+    color: #666;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+/* ===== АКТИВНЫЕ СОСТОЯНИЯ АНИМАЦИИ ===== */
+.atmosphere-section.animate-in .atmosphere-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.atmosphere-section.animate-in .atmosphere-text-container {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.atmosphere-section.animate-in .text-paragraph.large {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.atmosphere-section.animate-in .text-paragraph.medium {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.atmosphere-section.animate-in .text-paragraph.small {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.atmosphere-section.animate-in .atmosphere-footer {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ===== ГРАДИЕНТНЫЙ ПЕРЕХОД К СЛЕДУЮЩЕЙ СЕКЦИИ ===== */
+.atmosphere-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 50%, #000000 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+
+
+
+
+
+/* video-atmosphere.css - ФИКСИРОВАННЫЕ РАЗМЕРЫ БЕЗ ВЛИЯНИЯ ВИДЕО */
+
+/* ===== ОСНОВНОЙ КОНТЕЙНЕР ДЛЯ ВИДЕО ===== */
+.video-atmosphere-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto 0;
+    padding: 0 20px;
+    z-index: 1;
+}
+
+/* ===== СЕТКА С ФИКСИРОВАННЫМИ РАЗМЕРАМИ ===== */
+.video-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Большое видео 2 части, маленькие - 1 часть */
+    grid-template-rows: 1fr; /* Одна строка */
+    gap: 20px; /* Равное расстояние между всеми элементами */
+    height: 500px; /* Фиксированная высота всего блока */
+}
+
+/* ===== БОЛЬШОЕ ВИДЕО (слева) - ФИКСИРОВАННЫЙ РАЗМЕР ===== */
+.main-video {
+    grid-column: 1 / 2;
+    grid-row: 1;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    background: #000;
+    width: 100%;
+    height: 100%; /* Занимает всю высоту своей ячейки */
+}
+
+/* Контейнер для видео с фиксированными размерами */
+.video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.main-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block; /* Убираем лишние отступы */
+}
+
+.main-video-label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    z-index: 10; /* Выше видео */
+}
+
+/* ===== КОНТЕЙНЕР ДЛЯ МАЛЕНЬКИХ ВИДЕО (справа) ===== */
+.side-videos {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 1fr; /* Одна колонка */
+    grid-template-rows: 1fr 1fr; /* Две равные строки */
+    gap: 20px; /* Точно такой же gap как в основной сетке */
+    height: 100%;
+    width: 100%;
+}
+
+/* ===== МАЛЕНЬКИЕ ВИДЕО - ФИКСИРОВАННЫЕ РАЗМЕРЫ ===== */
+.small-video {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background: #000;
+    width: 100%;
+    height: 100%; /* Занимает всю высоту своей ячейки в grid */
+}
+
+.small-video .video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.small-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.small-video-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    z-index: 10;
+}
+
+/* ===== КЛАССЫ ДЛЯ КОНТРОЛЯ РАЗМЕРОВ ===== */
+
+/* ФИКСИРОВАННЫЕ ВЫСОТЫ (высота всего блока) */
+.video-height-xs .video-grid { height: 300px; }
+.video-height-sm .video-grid { height: 350px; }
+.video-height-md .video-grid { height: 400px; }
+.video-height-lg .video-grid { height: 450px; }
+.video-height-xl .video-grid { height: 500px; }
+
+/* ФИКСИРОВАННЫЕ ПРОПОРЦИИ ВНУТРИ КОНТЕЙНЕРОВ */
+/* Большое видео - соотношение сторон */
+.main-video.aspect-16-9 { aspect-ratio: 16/9; height: auto; }
+.main-video.aspect-4-3 { aspect-ratio: 4/3; height: auto; }
+.main-video.aspect-1-1 { aspect-ratio: 1/1; height: auto; }
+
+/* Маленькие видео - соотношение сторон */
+.small-video.aspect-4-3 { aspect-ratio: 4/3; height: auto; }
+.small-video.aspect-1-1 { aspect-ratio: 1/1; height: auto; }
+.small-video.aspect-16-9 { aspect-ratio: 16/9; height: auto; }
+
+/* ПРОПОРЦИИ МЕЖДУ БОЛЬШИМ И МАЛЕНЬКИМИ */
+.video-ratio-2-1 .video-grid { grid-template-columns: 2fr 1fr; } /* по умолчанию */
+.video-ratio-3-1 .video-grid { grid-template-columns: 3fr 1fr; }
+.video-ratio-5-2 .video-grid { grid-template-columns: 5fr 2fr; }
+.video-ratio-1-1 .video-grid { grid-template-columns: 1fr 1fr; }
+
+/* ОБРАБОТКА ВИДЕО */
+.video-fit-cover video { object-fit: cover; }
+.video-fit-contain video { 
+    object-fit: contain; 
+    background: #000;
+}
+
+/* ВЫРАВНИВАНИЕ ВИДЕО В КОНТЕЙНЕРЕ */
+.video-align-center video { object-position: center center; }
+.video-align-top video { object-position: center top; }
+.video-align-bottom video { object-position: center bottom; }
+
+/* РАССТОЯНИЕ МЕЖДУ ЭЛЕМЕНТАМИ */
+.video-gap-xs .video-grid { gap: 10px; }
+.video-gap-sm .video-grid { gap: 15px; }
+.video-gap-md .video-grid { gap: 20px; }
+.video-gap-lg .video-grid { gap: 25px; }
+.video-gap-xl .video-grid { gap: 30px; }
+
+/* Расстояние между маленькими видео */
+.video-gap-xs .side-videos { gap: 10px; }
+.video-gap-sm .side-videos { gap: 15px; }
+.video-gap-md .side-videos { gap: 20px; }
+.video-gap-lg .side-videos { gap: 25px; }
+.video-gap-xl .side-videos { gap: 30px; }
+
+/* ===== ЭФФЕКТЫ ПРИ НАВЕДЕНИИ ===== */
+.main-video:hover video,
+.small-video:hover video {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+
+/* Планшеты */
+@media (max-width: 1024px) {
+    .video-grid {
+        height: 400px;
+        gap: 15px;
+    }
+    
+    .video-height-xs .video-grid { height: 250px; }
+    .video-height-sm .video-grid { height: 300px; }
+    .video-height-md .video-grid { height: 350px; }
+    .video-height-lg .video-grid { height: 400px; }
+    .video-height-xl .video-grid { height: 450px; }
+}
+
+/* Мобильные (вертикальный стек) */
+@media (max-width: 768px) {
+    .video-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        height: 700px; /* Высота для двух рядов */
+        gap: 15px;
+    }
+    
+    .main-video {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+    }
+    
+    .side-videos {
+        grid-column: 1;
+        grid-row: 2;
+        grid-template-columns: 1fr 1fr; /* Две колонки в ряд */
+        grid-template-rows: 1fr; /* Одна строка */
+        gap: 15px;
+        height: 100%;
+    }
+    
+    /* На мобильных убираем aspect-ratio чтобы видео заполняли контейнеры */
+    .main-video.aspect-16-9,
+    .main-video.aspect-4-3,
+    .main-video.aspect-1-1,
+    .small-video.aspect-4-3,
+    .small-video.aspect-1-1,
+    .small-video.aspect-16-9 {
+        aspect-ratio: unset;
+        height: 100%;
+    }
+}
+
+/* Очень маленькие мобильные */
+@media (max-width: 480px) {
+    .video-grid {
+        height: 600px;
+        gap: 10px;
+    }
+    
+    .side-videos {
+        grid-template-columns: 1fr; /* Одна колонка - в столбик */
+        grid-template-rows: 1fr 1fr;
+        gap: 10px;
+    }
+}
+
+
+
+
+
+/* location.css - ИСПРАВЛЕННАЯ ВЕРСИЯ */
+
+/* ===== СЕКЦИЯ МЕСТОПОЛОЖЕНИЯ ===== */
+.location-section {
+    position: relative;
+    min-height: 65vh;
+    padding: 60px 5%;
+    background: #000000;
+
+    overflow: hidden;
+    isolation: isolate;
+    z-index: 80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Легкая анимация текстуры */
+@keyframes textureMove {
+    0% { background-position: 0% 0%, 0% 0%; }
+    100% { background-position: 200px 200px, 0% 0%; }
+}
+
+
+.atmosphere-section {
+    animation: textureMove 60s linear infinite;
+}
+
+/* Добавляем легкое свечение по краям */
+.atmosphere-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(100, 100, 100, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(78, 78, 78, 0.1) 0%, transparent 50%);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+
+
+/* ===== ФОТОГРАФИЯ СВЕРХУ  ===== */
+.location-photo-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    overflow: hidden;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 1.5s cubic-bezier(0.22, 0.61, 0.36, 1), 
+                transform 1.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.location-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.8) contrast(1.2);
+}
+
+/* ===== ЗАГОЛОВОК ПОСЕРЕДИНЕ ФОТО ===== */
+.location-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(30px);
+    font-family: var(--font-cormorant), serif;
+    font-size: 3.2rem;
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: 2px;
+    text-align: center;
+    opacity: 0;
+    z-index: 2;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.9s ease 0.5s, 
+                transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.5s;
+    white-space: nowrap;
+}
+
+/* ===== КОНТЕНТ СЕКЦИИ ===== */
+.location-content {
+    position: relative;
+    z-index: 3;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 25vh;
+    padding-top: 30px;
+}
+
+/* ===== ЛЕВАЯ ЧАСТЬ - ТЕКСТ С АДРЕСОМ ===== */
+.location-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 40px;
+    margin-top: -20px;
+}
+
+.contact-details {
+    background: transparent;
+    padding: 0;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Блок с адресом - ВОЗВРАЩАЕМ HOVER АНИМАЦИЮ */
+.address-block {
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.8s ease 0.7s, transform 0.8s ease 0.7s;
+    padding: 15px;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+}
+
+/* ВОЗВРАЩАЕМ HOVER АНИМАЦИЮ */
+.address-block:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(-20px) translateY(-5px);
+}
+
+.address-title {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: right;
+}
+
+.address-text {
+    font-family: var(--font-montserrat), sans-serif;
+    color: #fff;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    text-align: right;
+}
+
+.address-text p {
+    margin-bottom: 8px;
+}
+
+/* Контакты */
+.contacts-block {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.8s ease 0.9s, transform 0.8s ease 0.9s;
+    padding: 15px;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+}
+
+/* ВОЗВРАЩАЕМ HOVER АНИМАЦИЮ */
+.contacts-block:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(-20px) translateY(-5px);
+}
+
+.contacts-title {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: right;
+}
+
+.contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: flex-end;
+}
+
+/* ФИКС: УБИРАЕМ direction: rtl - ЭТО ПРИЧИНА ОТЗЕРКАЛИВАНИЯ */
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: var(--font-montserrat), sans-serif;
+    color: #fff;
+    font-size: 1.1rem;
+    /* УБИРАЕМ direction: rtl - ЭТО И ОТЗЕРКАЛИВАЛО НОМЕР */
+}
+
+
+
+
+
+/* ===== ПРАВАЯ ЧАСТЬ - КАРТА БЕЗ КНОПКИ "ОТКРЫТЬ В ЯНДЕКС КАРТАХ" ===== */
+.map-container {
+    width: 100%;
+    height: 350px;
+    background: #0a0a0a;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 1s ease 0.6s, transform 1s ease 0.6s;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    margin-top: -20px;
+    margin-left: -40px;
+}
+
+/* Карта с отключенной кнопкой Яндекс */
+.map-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    filter: brightness(0.95) contrast(1.05);
+}
+
+/* Скрываем кнопку "Открыть в Яндекс Картах" */
+.map-frame::after {
+    display: none !important;
+}
+
+/* Маркер на карте */
+.map-marker {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 18px 22px;
+    border-radius: 10px;
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+    max-width: 280px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.8s ease 1s, transform 0.8s ease 1s;
+    backdrop-filter: blur(5px);
+    z-index: 2;
+}
+
+.marker-title {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 8px;
+    letter-spacing: 1.2px;
+    font-weight: 500;
+}
+
+.marker-address {
+    font-family: var(--font-montserrat), sans-serif;
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+/* ===== АКТИВНЫЕ СОСТОЯНИЯ АНИМАЦИИ ===== */
+.location-section.animate-in .location-photo-container {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.location-section.animate-in .location-title {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+}
+
+.location-section.animate-in .address-block {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.location-section.animate-in .contacts-block {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.location-section.animate-in .map-container {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.location-section.animate-in .map-marker {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.location-section.animate-in .navigation-button {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+
+
+

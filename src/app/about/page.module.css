@@ -1,0 +1,996 @@
+/* ===== ГЕРОЙ-СЕКЦИЯ ===== */
+.about-hero {
+    position: relative;
+    height: 70vh;
+    min-height: 800px;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    margin-top: 80px;
+     margin: 0;
+    padding: 0;
+}
+
+/* ФОНОВАЯ КАРТИНКА */
+.about-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/фон-о-нас.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: 1;
+    
+    /* Видимость картинки - можно менять от 0.3 до 0.7 */
+    opacity: 0.4;
+    
+    /* Начальное состояние для анимации */
+    opacity: 0;
+    transform: scale(1.05);
+    
+    /* Анимация появления */
+    animation: imageAppear 1.5s ease 0.3s forwards;
+}
+
+/* Анимация для фона */
+@keyframes imageAppear {
+    0% {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 0.4; /* Конечная прозрачность */
+        transform: scale(1);
+    }
+}
+
+.about-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    padding: 0 20px;
+    margin-top: 60px; /* Компенсируем высоту шапки */
+}
+
+.about-main-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 5rem;
+    font-weight: 200;
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1.5s 0.5s ease-out forwards;
+}
+
+.about-hero-subtitle {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1.3rem;
+    color: #e0e0e0;
+    letter-spacing: 1px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.5s 0.8s ease-out forwards;
+}
+
+/* ===== СЕКЦИЯ МИССИИ ===== */
+.mission-section {
+    padding: 100px 10%;
+    background: #000000;
+    position: relative;
+    z-index: 80;
+}
+
+.mission-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.mission-text {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.mission-section.animate-in .mission-text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mission-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.mission-line {
+    width: 80px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    margin-bottom: 40px;
+}
+
+.mission-paragraph {
+    font-family: var(--font-cormorant), serif;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.mission-section.animate-in .mission-paragraph {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mission-paragraph.large {
+    font-size: 2rem;
+    font-weight: 300;
+    transition-delay: 0.2s;
+}
+
+.mission-paragraph.medium {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #e0e0e0;
+    transition-delay: 0.4s;
+}
+
+.mission-paragraph.small {
+    font-size: 1.2rem;
+    color: #ccc;
+    transition-delay: 0.6s;
+}
+
+/* КОНТЕЙНЕР ДЛЯ ФОТО КОМАНДЫ */
+.mission-image {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+    width: 100%;
+    height: 500px; /* РАЗМЕР КОНТЕЙНЕРА - МОЖНО МЕНЯТЬ */
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.mission-section.animate-in .mission-image {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* САМО ФОТО КОМАНДЫ */
+.mission-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* cover - заполняет контейнер, contain - помещается целиком */
+    object-position: center center; /* ПОЛОЖЕНИЕ ФОТО ВНУТРИ КОНТЕЙНЕРА: center, top, bottom, left, right */
+    transition: transform 0.5s ease;
+    border-radius: 10px;
+}
+
+.mission-photo:hover {
+    transform: scale(1.02); /* Легкое увеличение при наведении */
+}
+
+/* ===== СЕКЦИЯ ЦЕННОСТЕЙ ===== */
+.values-section {
+    padding: 100px 10%;
+    background: #0a0a0a;
+    position: relative;
+    z-index: 85;
+}
+
+.values-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.values-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 60px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.values-section.animate-in .values-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.value-card {
+    background: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.values-section.animate-in .value-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.value-card:nth-child(1) { transition-delay: 0.1s; }
+.value-card:nth-child(2) { transition-delay: 0.2s; }
+.value-card:nth-child(3) { transition-delay: 0.3s; }
+.value-card:nth-child(4) { transition-delay: 0.4s; }
+
+.value-card:hover {
+    transform: translateY(-10px);
+    background: rgba(40, 40, 40, 0.8);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.value-icon {
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 25px;
+    height: 80px;
+    width: 80px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+}
+
+.value-card-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.value-card-text {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+/* ===== СЕКЦИЯ КОМАНДЫ ===== */
+.team-section {
+    padding: 100px 10%;
+    background: #000000;
+    position: relative;
+    z-index: 80;
+}
+
+.team-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.team-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.team-subtitle {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1.2rem;
+    color: #aaa;
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.team-member {
+    display: grid;
+    grid-template-columns: 300px 1fr; /* ШИРИНА ФОТО: 300px, остальное текст */
+    gap: 50px;
+    align-items: start;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.team-section.animate-in .team-member {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.team-member:nth-child(1) { transition-delay: 0.2s; }
+.team-member:nth-child(2) { transition-delay: 0.4s; }
+
+/* КОНТЕЙНЕР ДЛЯ ФОТО ЧЛЕНА КОМАНДЫ */
+.member-photo {
+    width: 100%;
+    height: 400px; /* ВЫСОТА КОНТЕЙНЕРА - МОЖНО МЕНЯТЬ */
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* САМО ФОТО ЧЛЕНА КОМАНДЫ */
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ПОЛНОСТЬЮ ЗАПОЛНЯЕТ КОНТЕЙНЕР */
+    object-position: center top; /* ПОЛОЖЕНИЕ: center, top, bottom */
+    transition: transform 0.5s ease;
+}
+
+.member-photo:hover img {
+    transform: scale(1.03); /* Легкое увеличение при наведении */
+}
+
+.member-info {
+    padding-top: 20px;
+}
+
+.member-name {
+    font-family: var(--font-cormorant), serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.member-position {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1.1rem;
+    color: #aaa;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.member-bio {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.member-quote {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 0 8px 8px 0;
+    margin-top: 30px;
+    position: relative;
+}
+
+.member-quote i {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.5rem;
+    margin-right: 10px;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+}
+
+.member-quote p {
+    font-family: var(--font-cormorant), serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #fff;
+    margin-left: 35px;
+    line-height: 1.5;
+}
+
+/* ===== СЕКЦИЯ ИСТОРИИ ===== */
+.story-section {
+    padding: 100px 10%;
+    background: #0a0a0a;
+    position: relative;
+    z-index: 85;
+}
+
+.story-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+/* КОНТЕЙНЕР ДЛЯ ИСТОРИЧЕСКОГО ФОТО */
+.story-image {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    width: 100%;
+    height: 500px; /* ВЫСОТА КОНТЕЙНЕРА - МОЖНО МЕНЯТЬ */
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.story-section.animate-in .story-image {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* САМО ИСТОРИЧЕСКОЕ ФОТО */
+.story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* cover или contain */
+    object-position: center center; /* ПОЛОЖЕНИЕ ФОТО */
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.5s ease;
+}
+
+.story-image:hover img {
+    transform: scale(1.02); /* Легкое увеличение при наведении */
+}
+
+.story-content {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+}
+
+.story-section.animate-in .story-content {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.story-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.story-text {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #ccc;
+    margin-bottom: 40px;
+}
+
+.story-text p {
+    margin-bottom: 20px;
+}
+
+.achievements {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.achievement {
+    text-align: center;
+    flex: 1;
+}
+
+.achievement-number {
+    display: block;
+    font-family: var(--font-cormorant), serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.achievement-text {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.9rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===== ГАЛЕРЕЯ ===== */
+.gallery-section {
+    padding: 100px 10%;
+    background: #000000;
+    position: relative;
+    z-index: 80;
+}
+
+.gallery-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.gallery-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.gallery-subtitle {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1.2rem;
+    color: #aaa;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 300px); /* ВЫСОТА КАЖДОГО ЭЛЕМЕНТА */
+    gap: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s ease;
+}
+
+.gallery-section.animate-in .gallery-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ПЕРВЫЙ ЭЛЕМЕНТ БОЛЬШЕ ОСТАЛЬНЫХ */
+.gallery-item-large {
+    grid-column: span 2; /* ЗАНИМАЕТ 2 КОЛОНКИ */
+}
+
+.gallery-item:nth-child(1) { transition-delay: 0.1s; }
+.gallery-item:nth-child(2) { transition-delay: 0.2s; }
+.gallery-item:nth-child(3) { transition-delay: 0.3s; }
+.gallery-item:nth-child(4) { transition-delay: 0.4s; }
+.gallery-item:nth-child(5) { transition-delay: 0.5s; }
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+/* САМИ ФОТО В ГАЛЕРЕЕ */
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* cover - заполняет контейнер */
+    object-position: center center; /* ПОЛОЖЕНИЕ ФОТО */
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05); /* Увеличение при наведении */
+}
+
+/* ПОДПИСЬ К ФОТО В ГАЛЕРЕЕ */
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.9rem;
+    color: #fff;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+    transform: translateY(0); /* Показываем подпись при наведении */
+}
+
+/* ===== СЕКЦИЯ ПРИГЛАШЕНИЯ ===== */
+.invitation-section {
+    padding: 100px 10%;
+    background: #0a0a0a;
+    position: relative;
+    z-index: 85;
+    text-align: center;
+}
+
+.invitation-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.invitation-title {
+    font-family: var(--font-cormorant), serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.invitation-section.animate-in .invitation-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.invitation-text {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: #ccc;
+    margin-bottom: 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+}
+
+.invitation-section.animate-in .invitation-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* КНОПКИ КАК В ШАПКЕ */
+.invitation-buttons {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.invitation-button {
+    display: inline-block;
+    padding: 20px 40px; /* Такой же padding */
+    
+    /* ТОЧНО ТАКИЕ ЖЕ СТИЛИ КАК В ШАПКЕ */
+    background: rgba(60, 60, 60, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    
+    /* ТЕКСТ ТОЧНО ТАК ЖЕ */
+    color: white;
+    text-decoration: none;
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    
+    /* АНИМАЦИЯ ПОЯВЛЕНИЯ */
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    
+
+    /* АНИМАЦИЯ ПРИ НАВЕДЕНИИ - ВАЖНО! */
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Анимация появления */
+.invitation-section.animate-in .invitation-button {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.invitation-section.animate-in .invitation-button:nth-child(1) { 
+    transition: all 0.3s ease, opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s; 
+}
+.invitation-section.animate-in .invitation-button:nth-child(2) { 
+    transition: all 0.3s ease, opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s; 
+}
+
+/* ХОВЕР ЭФФЕКТ - ТОЧНО КАК В ШАПКЕ */
+.invitation-button:hover {
+    background: rgba(80, 80, 80, 0.8);
+    transform: scale(1.05);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 1.2px;
+    
+    /* УБИРАЕМ !important и все задержки */
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+
+/* Анимация появления кнопок */
+.invitation-section.animate-in .invitation-button {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.invitation-section.animate-in .invitation-button:nth-child(1) { 
+    transition: all 0.3s ease, opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s; 
+}
+.invitation-section.animate-in .invitation-button:nth-child(2) { 
+    transition: all 0.3s ease, opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s; 
+}
+
+
+/* АДАПТИВНОСТЬ ДЛЯ КНОПОК */
+@media (max-width: 768px) {
+    .invitation-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .invitation-button {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        padding: 18px 30px;
+    }
+    
+    /* На мобильных убираем transform: translateY(-50%) так как кнопки по центру */
+    .invitation-button:hover {
+        transform: scale(1.05);
+    }
+}
+
+@media (max-width: 576px) {
+    .invitation-button {
+        font-size: 0.85rem;
+        padding: 16px 25px;
+    }
+}
+
+/* ===== КЛАССЫ ДЛЯ БЫСТРОЙ НАСТРОЙКИ ФОТО ===== */
+
+/* Классы для размера контейнеров */
+.container-small { height: 300px !important; }
+.container-medium { height: 400px !important; }
+.container-large { height: 500px !important; }
+.container-xlarge { height: 600px !important; }
+
+/* Классы для object-fit (как фото помещается в контейнер) */
+.fit-cover { object-fit: cover !important; } /* Заполняет контейнер, обрезая края */
+.fit-contain { object-fit: contain !important; } /* Вмещается целиком, могут быть поля */
+.fit-fill { object-fit: fill !important; } /* Растягивается под контейнер */
+
+/* Классы для положения фото внутри контейнера */
+.position-center { object-position: center center !important; }
+.position-top { object-position: center top !important; }
+.position-bottom { object-position: center bottom !important; }
+.position-left { object-position: left center !important; }
+.position-right { object-position: right center !important; }
+.position-top-left { object-position: left top !important; }
+.position-top-right { object-position: right top !important; }
+.position-bottom-left { object-position: left bottom !important; }
+.position-bottom-right { object-position: right bottom !important; }
+
+/* ===== АНИМАЦИИ ===== */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 1200px) {
+    .mission-content,
+    .story-container {
+        gap: 50px;
+    }
+    
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .gallery-grid {
+        grid-template-rows: repeat(3, 250px); /* Уменьшаем высоту на планшетах */
+    }
+    
+    .gallery-item:nth-child(1) { grid-column: span 3; }
+    
+    /* Адаптация размеров фото на планшетах */
+    .mission-image,
+    .story-image {
+        height: 400px;
+    }
+    
+    .member-photo {
+        height: 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    .mission-content,
+    .story-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .team-member {
+        grid-template-columns: 250px 1fr;
+        gap: 30px;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 250px);
+    }
+    
+    .gallery-item:nth-child(1) { grid-column: span 2; }
+    
+    .about-main-title {
+        font-size: 4rem;
+    }
+    
+    /* Размеры фото на средних экранах */
+    .mission-image,
+    .story-image {
+        height: 350px;
+    }
+    
+    .member-photo {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mission-section,
+    .values-section,
+    .team-section,
+    .story-section,
+    .gallery-section,
+    .invitation-section {
+        padding: 60px 5%;
+    }
+    
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .team-member {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .member-photo {
+        height: 300px; /* Фиксированная высота на мобильных */
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 200px); /* Меньшая высота на мобильных */
+    }
+    
+    .gallery-item:nth-child(1) { grid-column: span 1; }
+    
+    .achievements {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .invitation-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .invitation-button {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+    
+    .about-main-title {
+        font-size: 3rem;
+    }
+    
+    .about-hero {
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    /* Размеры фото на мобильных */
+    .mission-image,
+    .story-image {
+        height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .mission-title,
+    .values-title,
+    .team-title,
+    .story-title,
+    .gallery-title,
+    .invitation-title {
+        font-size: 2.5rem;
+    }
+    
+    .mission-paragraph.large {
+        font-size: 1.5rem;
+    }
+    
+    .mission-paragraph.medium {
+        font-size: 1.2rem;
+    }
+    
+    .mission-paragraph.small {
+        font-size: 1rem;
+    }
+    
+    .member-name {
+        font-size: 2rem;
+    }
+    
+    .member-quote p {
+        font-size: 1.1rem;
+    }
+    
+    /* Минимальные размеры фото на очень маленьких экранах */
+    .mission-image,
+    .story-image {
+        height: 250px;
+    }
+    
+    .member-photo {
+        height: 250px;
+    }
+    
+    .gallery-grid {
+        grid-template-rows: repeat(5, 180px);
+    }
+}
